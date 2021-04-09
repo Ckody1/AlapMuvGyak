@@ -7,7 +7,10 @@ public class Muveletek extends javax.swing.JFrame {
      */
     public Muveletek() {
         initComponents();
+        
     }
+    int eredmeny = 0;
+    boolean ellenorzes = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,15 +74,17 @@ public class Muveletek extends javax.swing.JFrame {
             pnlGyakorlasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGyakorlasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlGyakorlasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblValasz, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlGyakorlasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlGyakorlasLayout.createSequentialGroup()
                         .addComponent(lblFeladat, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEredmeny, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEllenorzes)
-                .addContainerGap())
+                        .addComponent(txtEredmeny, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEllenorzes)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGyakorlasLayout.createSequentialGroup()
+                        .addComponent(lblValasz, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))))
         );
         pnlGyakorlasLayout.setVerticalGroup(
             pnlGyakorlasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,6 +226,11 @@ public class Muveletek extends javax.swing.JFrame {
 
         menuMuveletekOsztas.setSelected(true);
         menuMuveletekOsztas.setText("Osztás");
+        menuMuveletekOsztas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMuveletekOsztasActionPerformed(evt);
+            }
+        });
         mnuMuvelet.add(menuMuveletekOsztas);
 
         menuMuveletekSzorzas.setSelected(true);
@@ -263,15 +273,21 @@ public class Muveletek extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEllenorzesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEllenorzesActionPerformed
-        
+        ellenorzes = true;
+        vegEredmeny();
     }//GEN-LAST:event_btnEllenorzesActionPerformed
 
     private void btnMegoldasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMegoldasActionPerformed
         
     }//GEN-LAST:event_btnMegoldasActionPerformed
+
+    private void menuMuveletekOsztasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMuveletekOsztasActionPerformed
+       osztas();
+    }//GEN-LAST:event_menuMuveletekOsztasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,6 +325,25 @@ public class Muveletek extends javax.swing.JFrame {
                 new Muveletek().setVisible(true);
             }
         });
+    }
+    private void osztas(){
+        int szam1 = 10;
+        int szam2 = 5;
+        eredmeny = szam1 / szam2;
+        lblFeladat.setText(szam1 + " / " + szam2 + " = ");
+        vegEredmeny();
+    }
+    private void vegEredmeny(){
+        String valasz = String.valueOf(eredmeny);
+        if(ellenorzes){
+            if(valasz.equals(txtEredmeny.getText())){
+                lblValasz.setText("A válaszod jó");
+            }
+            else{
+                lblValasz.setText("A válaszod nem jó");
+            }
+        }
+        txtEredmeny.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
